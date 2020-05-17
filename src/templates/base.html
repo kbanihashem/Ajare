@@ -24,7 +24,7 @@
 {% block menu %}
 <div class="ui large top menu" style="margin:0">
     <div class="ui container">
-        <a class="active item" href="{% url 'users:home' %}"><i class="home large icon"></i></a>
+        <a class="active item" href="{% url 'index' %}"><i class="home large icon"></i></a>
         <a class="active item" href="{% url 'about' %}">about</a>
         <a class="active item" href="#">FAQ</a>
         {% if user.is_authenticated %}
