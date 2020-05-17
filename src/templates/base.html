@@ -26,6 +26,10 @@
     <div class="ui container">
         <a class="active item" href="{% url 'users:home' %}"><i class="home large icon"></i></a>
         <a class="active item" href="{% url 'about_page' %}">about</a>
+        <a class="active item" href="#">FAQ</a>
+        {% if user.is_authenticated %}
+            <a class="active item" href="{% url 'users:profile' %}">profile page</a>
+        {% endif %}
         <div class="right menu">
             <div class="item">
                 {% if user.is_authenticated %}
@@ -60,15 +64,6 @@
 {% endif %}
 
 <div class="ui grid" style="margin: auto; min-height: 80%;">
-    {% if user.is_authenticated %}
-    <div class="four wide column">
-        <div class="ui large vertical menu">
-            <a class="item active" href="{% url 'users:profile' %}">
-                Profile
-            </a>
-        </div>
-    </div>
-    {% endif %}
     <div class="twelve wide stretched column" style="margin: auto;">
         <div class="ui segment">
             {% block content %}
