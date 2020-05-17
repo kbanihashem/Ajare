@@ -4,8 +4,10 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=True, blank=True)
     image = models.ImageField(default='default.jpeg', upload_to='profile_pics')
-
+    national_id = models.CharField(max_length=10, null=True, blank=True)
+    
     def __str__(self):
         return f"{self.user.username} Profile"
 
