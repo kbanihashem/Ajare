@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="ui container" style="margin-top:1em">
+        <h1>{{ product.name }} </h1>
+        <div class="ui large image">
+            <img src = "{{ product.image.url }}">
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="border-top pt-3">
+            <p>
+                {{ product.description }}
+            </p>
+        </div>
+    </div>
+    <button class="ui button">
+        <a href='#'>
+        Rent for a week staggering price of {{ product.price }}
+        </a>
+    </button>
+{% endblock content %}
+
