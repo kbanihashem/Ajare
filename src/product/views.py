@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from product.models import Product
 
 def home(request):
-    return render(request, 'product/home.html', context=context)
+    ctx = {
+        'products': Product.objects.all()
+    }
+    return render(request, 'product/list.html', context=ctx)
 
 def detail(request, product_id):
     product = Product.objects.get(pk=product_id)

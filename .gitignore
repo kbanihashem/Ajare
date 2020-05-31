@@ -1,6 +1,8 @@
 .idea/
 venv/
 
+src/media/product_pics/
+
 # Latex
 ## Core latex/pdflatex auxiliary files:
 *.aux
