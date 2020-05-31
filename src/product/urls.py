@@ -8,4 +8,5 @@ app_name="product"
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('<int:product_id>', views.detail, name='detail'),
+    path('ajax/<int:product_id>', views.rating, name='rating_req'),
 ]

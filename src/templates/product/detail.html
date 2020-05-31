@@ -1,12 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <script>
+    $(document)
+    .ready(function() {
+      $('.ui.rating')
+        .rating()
+      ;
+      $('.ui.rating').rating('setting', 'onRate', function(value) {
+
+      $.ajax({
+       type: 'GET',
+       url: "{% url 'product:rating_req' product_id=product.id %}",
+       data: {"value": value},
+            success: function (response) {
+                $("#ratingheader").html("The average rating for this product is " + response["new"] + " stars!");
+            },
+            error: function (response) {
+                console.log("rating failed")
+            }
+       })
+      });
+
+    })
+    ;
+   </script>
+
+
     <div class="ui container" style="margin-top:1em">
-        <h1>{{ product.name }} </h1>
+        <h1 class="ui header red">{{ product.name }}</h1>
+    </div>
+    <div class="ui container center aligned">
         <div class="ui large image">
             <img src = "{{ product.image.url }}">
         </div>
     </div>
-
+<div class="ui horizontal divider">Description</div>
     <div class="content-section">
         <div class="border-top pt-3">
             <p>
@@ -14,10 +43,20 @@
             </p>
         </div>
     </div>
-    <button class="ui button">
-        <a href='#'>
-        Rent for a week staggering price of {{ product.price }}
+
+<div class="ui center aligned basic segment">
+    <div class="ui horizontal divider">Rating</div>
+    <h4> Your rating </h4><div class="ui massive star rating" data-rating="{{ rate }}" data-max-rating="5"></div>
+    <h3 class="ui header violet" id="ratingheader">The average rating for this product is {{ product.get_rating }} stars!</h3>
+    <div class="ui horizontal divider">
+    Order Now
+  </div>
+  <div class="ui teal labeled icon button">
+    <a href='#'>
+        <h4 class="ui header inverted"> Rent for a week staggering price of {{ product.price }} thousand Tomans </h4>
         </a>
-    </button>
+    <i class="add icon"></i>
+  </div>
+</div>
 {% endblock content %}
 

@@ -9,9 +9,9 @@
                         <img src="{{ product.image.url }}">
                     </a>
                     <div class="content">
-                    <div class="header">PlayStation 5</div>
+                    <div class="header">{{ product.name }}</div>
                     <div class="meta">
-                        <a>fill</a>
+<!--                        <a>fill</a>-->
                     </div>
                     <div class="description">
                         {{ product.description }}
@@ -19,7 +19,7 @@
                     </div>
                     <div class="extra content">
                     <span class="right floated">
-                        fill
+                        {{ product.get_rating }} <i class="star icon"></i>
                     </span>
                     <span>
                         <i class="dollar icon"></i>
