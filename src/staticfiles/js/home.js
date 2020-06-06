@@ -19,5 +19,8 @@ $(document)
       .sidebar('attach events', '.toc.item')
     ;
 
+    $('.ui.rating')
+      .rating()
+    ;
   })
 ;
