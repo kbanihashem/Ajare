@@ -22,6 +22,23 @@
        })
       });
 
+
+
+      $('#sendcom').on( "click", function() {
+       $.ajax({
+       type: 'POST',
+       url: "{% url 'product:comment_req' product_id=product.id %}",
+       data: {"text": $('#textfield').val(), 'csrfmiddlewaretoken':"{{ csrf_token }}"},
+            success: function (response) {
+  $("#comstart").prepend('<div class="comment"><a class="avatar"><img src="{{ user.profile.image.url }}"></a><div class="content"><a class="author">{{ user.username }}</a> <div class="metadata"><span class="date"> ' + response["date"] + '</span></div><div class="text">' + response["text"] + '</div></div></div>');
+  $('#textfield').val('');
+            },
+            error: function (response) {
+                console.log(response)
+            }
+       });
+      });
+
     })
     ;
    </script>
@@ -56,6 +73,41 @@
         <h4 class="ui header inverted"> Rent for a week staggering price of {{ product.price }} thousand Tomans </h4>
         </a>
     <i class="add icon"></i>
+  </div>
+  <div class="ui horizontal divider">Comments</div>
+</div>
+<div class="ui comments" id="comstart">
+  {% for comment in comments %}
+  <div class="comment">
+    <a class="avatar">
+      <img src="{{ comment.user.profile.image.url }}">
+    </a>
+    <div class="content">
+      <a class="author">{{ comment.user.username }}</a>
+      <div class="metadata">
+        <span class="date">{{ comment.date }}</span>
+      </div>
+      <div class="text">
+        {{ comment.text }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="comment">
+    <a class="avatar">
+      <img src="{{ user.profile.image.url }}">
+    </a>
+    <div class="content">
+      <a class="author">{{ user.username }}</a>
+      <form class="ui reply form">
+        <div class="field">
+          <textarea id="textfield"></textarea>
+        </div>
+        <div class="ui primary submit labeled icon button" id="sendcom">
+          <i class="icon edit"></i> Add Comment
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock content %}
