@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from orders.functions import get_credit
 from .forms import UserUpdateForm, ProfileUpdateForm, UserRegisterForm
 
 
@@ -46,7 +47,7 @@ def user_profile(request):
     u_form = UserUpdateForm(instance=request.user)
     p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    return render(request, 'users/profile1.html', context={'forms':[u_form, p_form], 'title':'Profile'})
+    return render(request, 'users/profile1.html', context={'forms':[u_form, p_form], 'title':'Profile', 'credit': get_credit(request.user)})
 
 def user_index(request):
     return render(request, 'index.html')
