@@ -8,6 +8,16 @@
     </div>
 
     <div class="ui container" style="margin-top: 1em;">
+        <p>
+            Your credit: {{ credit }} 
+            
+            <a href="{% url 'orders:increase_credit' %}">
+                <button class="ui green button" style="padding: 0.3em;" >
+                    +10,000
+                </button>
+            </a>
+        </p>
+
         <form class="ui form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             
