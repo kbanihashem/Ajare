@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="ui container" style="margin-top:1em">
+    <h1 class="ui header red">{{ product.name }}</h1>
+    <h3 class="ui header blue">Product value: {{ product.value }}</h3>
+    <h3 class="ui header blue">Renting price: {{ product.price }} a day</h3>
+    <h3 class="ui header blue">Average rating: {{ rate }}</h3>
+</div>
+<div class="ui container center aligned">
+    <div class="ui large image">
+        <img src = "{{ product.image.url }}">
+    </div>
+</div>
+
+<div class="ui horizontal divider">Description</div>
+    <div class="content-section">
+        <div class="border-top pt-3">
+            <p>
+                {{ product.description }}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="ui center aligned basic segment">
+    <h3 class="ui header violet" id="ratingheader">The average rating for this product is {{ product.get_rating }} stars!</h3>
+    <div class="ui horizontal divider">
+    Order Now
+    </div>
+    <div>
+</div>
+        <form class="ui form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+
+            {% for field in form %}
+                <div class="field">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <button class="ui button" type="submit">Submit</button>
+        </form>
+{% endblock content %}
+

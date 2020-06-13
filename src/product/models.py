@@ -7,6 +7,7 @@ class Product(models.Model):
     image = models.ImageField(default='default.jpeg', upload_to='product_pics')
     description = models.TextField()
     price = models.IntegerField(default=0) #in 1000 Tomans
+    value = models.IntegerField(default=0) #in 1000 Tomans
 
     def get_rating(self):
         ratings = Rating.objects.filter(product = self)
