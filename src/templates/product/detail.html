@@ -69,7 +69,7 @@
     Order Now
   </div>
   <div class="ui teal labeled icon button">
-    <a href='#'>
+      <a href='{% url 'orders:place_order' product_id=product.id %}'>
         <h4 class="ui header inverted"> Rent for a week staggering price of {{ product.price }} thousand Tomans </h4>
         </a>
     <i class="add icon"></i>

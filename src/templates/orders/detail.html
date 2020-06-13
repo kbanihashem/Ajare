@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <div class="ui form ">
+        <div class="ui mini image">
+            <a href="{% url 'product:detail' product_id=order.product.pk %}">
+                <img src = "{{ order.product.image.url }}">
+            </a>
+        </div>
+        <div class "Field">
+            <label>
+                Order id: {{ order.pk }}
+            </label>
+        </div>
+        <div class "Field">
+            <label>
+                Order start date: {{ order.start_date }}
+            </label>
+        </div>
+        <div class "Field">
+            <label>
+                Order duration: {{ order.duration }}
+            </label>
+        </div>
+        <div class "Field">
+            <label>
+                Order product: 
+                <a href="{% url 'product:detail' product_id=order.product.pk %}">
+                    {{ order.product.name }}
+                </a>
+            </label>
+        </div>
+        <div class "Field">
+            <label>
+                Order value: {{ order.value }}
+            </label>
+        </div>
+        <div class "Field">
+            <label>
+                Order price: {{ order.price }}
+            </label>
+        </div>
+        <div class "Field">
+            <label>
+                Order status: {{ order.status }}
+            </label>
+        </div>
+    </div>
+
+<div class="ui center aligned basic segment">
+</div>
+{% endblock content %}
+

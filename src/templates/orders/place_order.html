@@ -33,6 +33,21 @@
 </div>
         <form class="ui form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="ui red message">
+                            Error with field {{ field.label }}: {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% if form.non_field_errors %}
+                    <div class="ui red message">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+            {% endif %}
             
 
             {% for field in form %}
