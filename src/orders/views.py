@@ -43,7 +43,7 @@ def place_order(request, product_id):
                         product=product,
                         value=product.value,
                         price=product.price,
-                        status='Payed for',
+                        status=Order.STATUS_PAID,
                         )
                 messages.success(request, f"Order for {product.name} estblished")
                 return redirect("orders:detail", order_id=order.pk)
