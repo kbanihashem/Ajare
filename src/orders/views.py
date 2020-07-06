@@ -11,6 +11,11 @@ from .functions import change_credit, get_credit
 from product.models import Product, Rating
 from .forms import OrderCreateForm
 # Create your views here.
+@login_required
+def history(request):
+    user = request.user
+    orders = Order.objects.filter(user=user)
+    return render(request, 'orders/history.html', context={'orders': orders})
 
 @login_required
 def detail(request, order_id):

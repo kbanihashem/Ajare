@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+    <table class="ui celled table">
+      <thead>
+        <tr>
+            <th>Order id</th>
+            <th>Product</th>
+            <th>Start date</th>
+            <th>Duration</th>
+            <th>Order value</th>
+            <th>Order price</th>
+            <th>Order status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+            <tr>
+                <td data-label="Order id">
+                    <a href="{% url 'orders:detail' order_id=order.pk %}">
+                        {{ order.pk }}
+                    </a>
+                </td>
+                <td data-label="Product">
+                    <a href="{% url 'product:detail' product_id=order.product.pk %}">
+                        {{ order.product.name }}
+                    </a>
+                </td>
+                <td data-label="Start date">{{ order.start_date }}</td>
+                <td data-label="Duration">{{ order.duration }}</td>
+                <td data-label="Order value">{{ order.value }}</td>
+                <td data-label="Order price">{{ order.price }}</td>
+                <td data-label="Order status">{{ order.status }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock content %}
+
