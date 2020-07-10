@@ -6,9 +6,34 @@ import pytz
 
 def home(request):
     ctx = {
-        'products': Product.objects.all()
+        'products': Product.objects.all(),
+        'text': "All Products",
     }
     return render(request, 'product/list.html', context=ctx)
+
+
+def search(request):
+    query = request.GET.get('query', None)
+    if query is None or len(query) == 0:
+        return home(request)
+    else:
+        words = query.split()
+        results = []
+        products = Product.objects.all()
+        for product in products:
+            score = 0
+            for word in words:
+                word = word.lower()
+                if word in product.name.lower():
+                    score += 2
+                if word in product.description.lower():
+                    score += 1
+            if score > 0:
+                results.append((score, product))
+        results.sort()
+        results.reverse()
+        results = [r[1] for r in results]
+        return render(request, 'product/list.html', context={'products': results, 'text': "Search Results"})
 
 
 def detail(request, product_id):
