@@ -30,7 +30,7 @@ def search(request):
                     score += 1
             if score > 0:
                 results.append((score, product))
-        results.sort()
+        results.sort(key=lambda x: x[0])
         results.reverse()
         results = [r[1] for r in results]
         return render(request, 'product/list.html', context={'products': results, 'text': "Search Results"})
